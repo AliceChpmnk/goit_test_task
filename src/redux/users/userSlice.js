@@ -7,6 +7,7 @@ const usersInitialState = {
   error: null,
   limit: 3,
   page: 1,
+  endOfList: false,
 };
 
 const handlePendingReducer = (state) => {
@@ -46,8 +47,12 @@ const usersSlice = createSlice({
     // ---- GET ALL USERS ----
     .addCase(fetchUsers.pending, handlePendingReducer)
     .addCase(fetchUsers.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+      state.isLoading = false;
+      if (payload.length === 0) {
+        state.endOfList = true;
+      } else {
         state.users = [...state.users, ...payload.map(user => ({ ...user, following: false }))];
+      }
       })
     .addCase(fetchUsers.rejected, handleRejectedReducer)
 });

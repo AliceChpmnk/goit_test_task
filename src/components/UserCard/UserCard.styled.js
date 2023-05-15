@@ -5,6 +5,8 @@ export const UserCardsList = styled.ul`
 display: flex;
 gap: 30px;
 flex-wrap: wrap;
+padding: 0;
+justify-content: center;
 `
 export const UserCard = styled.li`
 box-sizing: border-box;
@@ -38,6 +40,16 @@ p:first-of-type {
 p:last-of-type {
     padding-bottom: 26px;
 }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 214px;
+    width: 100%;
+    height: 8px;
+    background: #EBD8FF;
+    box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06), inset 0px -1.71846px 3.43693px #AE7BE3, inset 0px 3.43693px 2.5777px #FBF8FF;
+  }
 `
 export const Logo = styled(logo)`
 position: absolute;
@@ -69,19 +81,12 @@ export const UserAvatar = styled.div`
     box-shadow: 0px -2.19582px 4.39163px #AE7BE3;
   }
   `
-export const Divider = styled.div`
-    position: absolute;
-    top: 214px;
-    width: 100%;
-    height: 8px;
-    background: #EBD8FF;
-    box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06), inset 0px -1.71846px 3.43693px #AE7BE3, inset 0px 3.43693px 2.5777px #FBF8FF;
-`
 
 export const BackgroundImg = styled.img`
     position: absolute;
     top: 28px;
     left: 36px;
+    width: 308px;
 `
 
 export const FollowBtn = styled.button`
@@ -91,8 +96,12 @@ font-size: 18px;
 line-height: 1.2;
 color: #373737;
 padding: 14px 39px;
-background: #5CD3A8;
+background: ${props => props.type === 'following' ? '#5CD3A8' : '#EBD8FF'};
 box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
 border-radius: 10.3108px;
 border: none;
+cursor: pointer;
+  &:hover {
+    background: ${props => props.type === 'following' ? '#7EE1BF' : '#FBD382'};
+  }
 `
